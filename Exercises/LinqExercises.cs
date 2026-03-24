@@ -361,6 +361,14 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task16_HighestGradePerStudent()
     {
+        var query = from s in UniversityData.Students
+            join e in UniversityData.Enrollments on s.Id equals e.StudentId
+                where e.FinalGrade is not null
+                group e by new {s.FirstName, s.LastName} into g
+                select  $"{g.Key.FirstName}, {g.Key.LastName}, {g.Max(x => x.FinalGrade)}";
+
+        return query;
+        
         throw NotImplemented(nameof(Task16_HighestGradePerStudent));
     }
 
@@ -379,6 +387,17 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge01_StudentsWithMoreThanOneActiveCourse()
     {
+        var query = from s in UniversityData.Students 
+            join e in UniversityData.Enrollments on s.Id equals e.StudentId 
+                where e.IsActive
+                group e by new {s.FirstName, s.LastName} into g
+                where g.Count() > 1
+                select $"{g.Key.FirstName}, {g.Key.LastName}, {g.Count()}";
+        
+        return query;
+                
+        
+        
         throw NotImplemented(nameof(Challenge01_StudentsWithMoreThanOneActiveCourse));
     }
 
@@ -396,7 +415,18 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge02_AprilCoursesWithoutFinalGrades()
     {
-        throw NotImplemented(nameof(Challenge02_AprilCoursesWithoutFinalGrades));
+
+        var query = from c in UniversityData.Courses
+            join e in UniversityData.Enrollments on c.Id equals e.CourseId
+            where c.StartDate.Month.Equals(4) && c.StartDate.Year.Equals(2026)
+            group e by c.Title
+            into g
+            where g.All(x => x.FinalGrade == null)
+            select $"{g.Key}";
+        
+        return query;
+
+    throw NotImplemented(nameof(Challenge02_AprilCoursesWithoutFinalGrades));
     }
 
     /// <summary>
@@ -414,6 +444,20 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge03_LecturersAndAverageGradeAcrossTheirCourses()
     {
+        
+        var query = from l in UniversityData.Lecturers
+            join c in UniversityData.Courses
+                on  l.Id equals c.LecturerId into g
+            from c in g.DefaultIfEmpty()
+                join e in UniversityData.Enrollments
+                on c.Id equals e.CourseId into g2
+            from  e in g2.DefaultIfEmpty()
+                where e.FinalGrade is not null
+                group e by new {l.FirstName, l.LastName} into g3
+                select $"{g3.Key.FirstName}, {g3.Key.LastName}, {g3.Average(c => c.FinalGrade)}";
+
+        return query;
+        
         throw NotImplemented(nameof(Challenge03_LecturersAndAverageGradeAcrossTheirCourses));
     }
 
@@ -432,6 +476,16 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Challenge04_CitiesAndActiveEnrollmentCounts()
     {
+        
+        var query =  from s in UniversityData.Students
+            join e in UniversityData.Enrollments on s.Id equals e.StudentId
+                where e.IsActive
+                group e by new {s.City} into g
+                orderby  g.Count() descending
+                select  $"{g.Key}, {g.Count()}";
+
+        return query; 
+        
         throw NotImplemented(nameof(Challenge04_CitiesAndActiveEnrollmentCounts));
     }
 
