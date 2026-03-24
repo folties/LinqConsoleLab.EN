@@ -175,7 +175,9 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task08_DistinctStudentCities()
     {
+        var method = UniversityData.Students.Select(c => c.City).Distinct().OrderBy(c => c);
         
+        return method;
         
         throw NotImplemented(nameof(Task08_DistinctStudentCities));
     }
@@ -192,6 +194,11 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task09_ThreeNewestEnrollments()
     {
+        var method = UniversityData.Enrollments.OrderByDescending(e => e.EnrollmentDate)
+            .Take(3).Select(e => $"{e.EnrollmentDate}, {e.StudentId}, {e.CourseId}");
+
+        return method;
+        
         throw NotImplemented(nameof(Task09_ThreeNewestEnrollments));
     }
 
@@ -208,6 +215,12 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task10_SecondPageOfCourses()
     {
+        var method = UniversityData.Courses
+            .OrderBy(c => c.Title).Skip(2).Take(2)
+            .Select(c => $"{c.Title}, {c.Category}");
+        
+        return method;
+        
         throw NotImplemented(nameof(Task10_SecondPageOfCourses));
     }
 
