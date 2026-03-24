@@ -26,3 +26,4 @@
 /Users/folti/Documents/APBD/LinqConsoleLab.EN/bin/Debug/net9.0/LinqConsoleLab.EN.pdb
 /Users/folti/Documents/APBD/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.genruntimeconfig.cache
 /Users/folti/Documents/APBD/LinqConsoleLab.EN/obj/Debug/net9.0/ref/LinqConsoleLab.EN.dll
+/Users/folti/Documents/APBD/LinqConsoleLab.EN/obj/Debug/net9.0/LinqConsoleLab.EN.sourcelink.json

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using LinqConsoleLab.EN.Data;
 
 namespace LinqConsoleLab.EN.Exercises;
@@ -86,6 +87,18 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task04_FirstAnalyticsCourse()
     {
+        var query = (from c in UniversityData.Courses
+            where c.Category.Equals("Analytics")
+                select $"{c.Title}, {c.StartDate}").FirstOrDefault();
+
+        var method = UniversityData.Courses
+            .Where(c => c.Category.Equals("Analytics"))
+                .Select(c => $"{c.Title}, {c.StartDate}")
+                    .FirstOrDefault();
+        
+
+        return query != null ?  [query] : ["Such course doesn't exist"];
+        
         throw NotImplemented(nameof(Task04_FirstAnalyticsCourse));
     }
 
@@ -103,6 +116,14 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task05_IsThereAnyInactiveEnrollment()
     {
+        var query = (from e in UniversityData.Enrollments
+            where e.IsActive == false
+                select e).Any();
+
+        return new[] { query ?  "True" : "False" };
+
+        var method = UniversityData.Enrollments.Any(e => !e.IsActive);
+        
         throw NotImplemented(nameof(Task05_IsThereAnyInactiveEnrollment));
     }
 
@@ -118,6 +139,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task06_DoAllLecturersHaveDepartment()
     {
+        var method = UniversityData.Lecturers.All(l => l.Department != null);
+
+        return new[] { method ? "True" : "False" };
+        
         throw NotImplemented(nameof(Task06_DoAllLecturersHaveDepartment));
     }
 
@@ -132,6 +157,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task07_CountActiveEnrollments()
     {
+        var method = UniversityData.Enrollments.Count(e => e.IsActive);
+
+        return [$"{method}"];
+        
         throw NotImplemented(nameof(Task07_CountActiveEnrollments));
     }
 
@@ -146,6 +175,8 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task08_DistinctStudentCities()
     {
+        
+        
         throw NotImplemented(nameof(Task08_DistinctStudentCities));
     }
 
