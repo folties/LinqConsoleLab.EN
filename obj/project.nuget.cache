@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "gy4ZZS5LDt8=",
+  "success": true,
+  "projectFilePath": "/Users/folti/Documents/APBD/LinqConsoleLab.EN/LinqConsoleLab.EN.csproj",
+  "expectedPackageFiles": [
+    "/Users/folti/.nuget/packages/microsoft.netcore.app.ref/9.0.13/microsoft.netcore.app.ref.9.0.13.nupkg.sha512",
+    "/Users/folti/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.13/microsoft.aspnetcore.app.ref.9.0.13.nupkg.sha512",
+    "/Users/folti/.nuget/packages/microsoft.netcore.app.host.osx-arm64/9.0.13/microsoft.netcore.app.host.osx-arm64.9.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
