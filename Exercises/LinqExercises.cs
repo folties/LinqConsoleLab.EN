@@ -16,7 +16,19 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task01_StudentsFromWarsaw()
     {
-        //Query syntax 
+        //query syntax
+        var query = from s in UniversityData.Students
+            where s.City.Equals("Warsaw")
+                select $"{s.IndexNumber}, {s.FirstName}, {s.LastName}";
+        
+        //method syntax 
+
+        var method = UniversityData.Students
+            .Where(s => s.City.Equals("Warsaw"))
+            .Select(s => $"{s.IndexNumber}, {s.FirstName}, {s.LastName}");
+        
+        return query;
+        
         
         throw NotImplemented(nameof(Task01_StudentsFromWarsaw));
     }
@@ -32,7 +44,13 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task02_StudentEmailAddresses()
     {
+        var query = from s in UniversityData.Students
+            select $"{s.Email}";
+        
+        return query;
+        
         throw NotImplemented(nameof(Task02_StudentEmailAddresses));
+        
     }
 
     /// <summary>
@@ -47,6 +65,12 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task03_StudentsSortedAlphabetically()
     {
+        
+        var query = from s in UniversityData.Students
+            orderby s.LastName, s.FirstName descending
+                select $"{s.IndexNumber}, {s.FirstName}, {s.LastName}";
+        
+        return  query;
         throw NotImplemented(nameof(Task03_StudentsSortedAlphabetically));
     }
 
